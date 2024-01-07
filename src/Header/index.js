@@ -1,23 +1,32 @@
 import React from "react";
+import Button from '@mui/material/Button';
+import { Box } from "@mui/material";
+
+
+const SignupButton = (props) =>{
+    return(
+        <Button sx={{margin:'10px'}} variant ="contained">회원가입</Button>
+    )
+}
 
 const LoginButton = (props) =>{
     return(
-        <button>로그인</button>
+        <Button variant ="contained">로그인</Button>
     )
 }
 
 const LogoutButton = (props) =>{
     return(
-        <button>로그아웃</button>
+        <Button variant ="contained">로그아웃</Button>
     )
 }
 
 const Header = (props) => {
 
     return (
-        <div>
-            <LoginButton/>
-        </div>
+        <Box sx={{padding: '10px', bgcolor: 'Background', textAlign: 'right'}}>
+            <SignupButton/><LoginButton/>
+        </Box>
     );
 };
 

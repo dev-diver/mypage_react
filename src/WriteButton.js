@@ -1,9 +1,13 @@
 import React from "react";
+import { Fab } from "@mui/material";
+import { Edit } from "@mui/icons-material";
 
 const WriteButton = (props) => {
 
     return (
-        <button>글쓰기</button>
+        <Fab color="primary" aria-label="add">
+            <Edit />
+        </Fab>
     );
 };
 

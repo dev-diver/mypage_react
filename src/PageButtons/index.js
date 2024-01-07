@@ -2,7 +2,8 @@ import React, { useState } from "react";
 
 import PrevButton from "./PrevButton";
 import NextButton from "./NextButton";
-import Button from "./Button";
+import NumberButton from "./NumberButton";
+import { ButtonGroup } from "@mui/material";
 
 const PageButtons = (props) => {
 
@@ -13,15 +14,15 @@ const PageButtons = (props) => {
     let button_length = Math.min(MAX_BUTTONS,pages);
     let buttons = [...Array(parseInt(button_length))]
         .map((e,i)=>{
-            return (<Button number={1+i+offset}/>)
+            return (<NumberButton number={1+i+offset}/>)
         });
 
     return (
-        <div>
+        <ButtonGroup>
             <PrevButton/>
                 {buttons}
             <NextButton/>
-        </div>
+        </ButtonGroup>
     );
 };
 
