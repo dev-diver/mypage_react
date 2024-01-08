@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 
-import WriteButton from '../WriteButton.js';
-import Article from '../Article.js';
+import ArticleListItem from './ArticleListItem.js';
 import PageButtons from '../PageButtons';
 
-export default function Board() {
+export default function Board(props) {
   const [selectedIndex, setSelectedIndex] = React.useState(1);
   const [items, setItems] = useState(
     [
@@ -26,6 +24,10 @@ export default function Board() {
   )
 
   const handleListItemClick = (event, index) =>{
+    //글 불러오기
+    const title="제목";
+    const text ="이름"
+    props.displayArticle(title, text);
     setSelectedIndex(index);
   };
 
@@ -36,22 +38,20 @@ export default function Board() {
 
   let articles =
     items.length > 0 && items.map((item,idx) => 
-      <Article 
-        item={item} 
-        select={select}
+      <ArticleListItem 
         key={idx}
+        idx={idx}
+        item={item}
+        select={select}
       />
     );
 
   return (
-    <Box sx={{ mx: 'auto',width: '100%', maxWidth: 500, bgcolor: 'background.paper', textAlign: 'center'}}>
-      <Box sx={{ textAlign : 'right'}}>
-        <WriteButton/>
-      </Box>
+    <div>
       <List component="nav">
         {articles}
       </List>
       <PageButtons offset={0} pages={5}/>
-    </Box>
+    </div>
   );
 }

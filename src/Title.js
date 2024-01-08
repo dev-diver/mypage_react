@@ -7,7 +7,6 @@ const Title = (props) => {
         <Box sx={{marginTop : '30px'}}>
             <Typography variant="h3" gutterBottom>
                 게시판
-                
             </Typography>
         </Box>
     );

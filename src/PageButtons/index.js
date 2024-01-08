@@ -7,14 +7,26 @@ import { ButtonGroup } from "@mui/material";
 
 const PageButtons = (props) => {
 
+    
     const MAX_BUTTONS = 10;
-    const [offset, setOffset] = useState(props.offset);
-    const [pages, setPages] = useState(props.pages);
+    const {offset, pages} = props;
+
+    const [selectedPage, setSelectedPage] = useState(1);
+
+    const selectPage = (e,i) => {
+        setSelectedPage(i);
+    }
 
     let button_length = Math.min(MAX_BUTTONS,pages);
     let buttons = [...Array(parseInt(button_length))]
         .map((e,i)=>{
-            return (<NumberButton number={1+i+offset}/>)
+            const number = 1+i+offset;
+            return (<NumberButton 
+                        key={i} 
+                        number={number} 
+                        selected={selectedPage==number}
+                        onClick={(e)=>selectPage(e,number)}
+                    />)
         });
 
     return (

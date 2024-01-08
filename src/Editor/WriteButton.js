@@ -5,7 +5,7 @@ import { Edit } from "@mui/icons-material";
 const WriteButton = (props) => {
 
     return (
-        <Fab color="primary" aria-label="add">
+        <Fab color="primary" aria-label="add" onClick={props.onClick}>
             <Edit />
         </Fab>
     );
