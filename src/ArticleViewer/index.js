@@ -15,7 +15,9 @@ const ArticleViewer = (props) => {
     }));
 
     return (
+        props.contents &&
         <Article
+            sx={{marginY: "10px"}}
             elevation={1}
         >
         <Box sx={{marginY: "10px"}}>

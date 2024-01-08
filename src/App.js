@@ -12,14 +12,15 @@ function App() {
 
   const [mode, setMode] = useState(false);
   const [showArticle, setShowArticle] = useState(false);
-  const [contents, setContents] =  useState({
-    title: "오리지널 제목",
-    text: "내용"
-  })
+  const [contents, setContents] =  useState(null);
+
+  const setWriteMode = (isWriteMode) => {
+    setMode(isWriteMode);
+    setShowArticle(!isWriteMode);
+  }
 
   const displayArticle = (title, text) => {
-    setMode(false);
-    setShowArticle(true)
+    setWriteMode(false);
     setContents({
       title: title,
       text: text
@@ -34,8 +35,7 @@ function App() {
         {showArticle && <ArticleViewer contents={contents}/>}
         <Editor 
           mode={mode}
-          setMode={setMode}
-          setShowArticle={setShowArticle}
+          setWriteMode={setWriteMode}
         />
         <Board displayArticle={displayArticle}/>
       </Box>

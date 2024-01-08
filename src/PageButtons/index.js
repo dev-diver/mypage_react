@@ -24,7 +24,7 @@ const PageButtons = (props) => {
             return (<NumberButton 
                         key={i} 
                         number={number} 
-                        selected={selectedPage==number}
+                        selected={selectedPage===number}
                         onClick={(e)=>selectPage(e,number)}
                     />)
         });
