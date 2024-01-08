@@ -5,6 +5,7 @@ import ArticleListItem from './ArticleListItem.js';
 import PageButtons from './PageButtons/index.js';
 
 import api from '../api.js';
+import { Box } from '@mui/material';
 
 export default function Board(props) {
   const [selectedIndex, setSelectedIndex] = React.useState(1);
@@ -18,7 +19,6 @@ export default function Board(props) {
   const { articlePerPage, pageNumber, setPageNumber, articleUpdated } = props;
 
   useEffect(() => {
-    console.log("articleUpdate", pageNumber, articlePerPage);
     // Fetch data on component mount
     api.get(`/article?page=${pageNumber}&size=${articlePerPage}`)
       .then((response) => {
@@ -34,9 +34,10 @@ export default function Board(props) {
 
   const handleListItemClick = (event, index) =>{
     //글 불러오기
+    const id = items[index].id;
     const title = items[index].title;
     const text = items[index].text;
-    props.displayArticle(title, text);
+    props.displayArticle(id, title, text);
     setSelectedIndex(index);
   };
 
@@ -66,7 +67,7 @@ export default function Board(props) {
     />]
 
   return (
-    <div>
+    <Box>
       <List component="nav">
         {articles}
       </List>
@@ -76,6 +77,6 @@ export default function Board(props) {
         setPageNumber = {setPageNumber}
         setOffset = {setOffset}
       />
-    </div>
+    </Box>
   );
 }
