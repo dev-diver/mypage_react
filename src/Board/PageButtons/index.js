@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 
 import PrevButton from "./PrevButton";
 import NextButton from "./NextButton";
@@ -9,11 +9,16 @@ const PageButtons = (props) => {
 
     
     const MAX_BUTTONS = 10;
-    const {offset, pages} = props;
+    const { offset, pages, setPageNumber, pageNumber, setOffset } = props;
 
     const [selectedPage, setSelectedPage] = useState(1);
 
+    useEffect(() => {
+        setSelectedPage(pageNumber+1);
+    }, [pageNumber])
+
     const selectPage = (e,i) => {
+        setPageNumber(i-1); //1더해진 숫자
         setSelectedPage(i);
     }
 

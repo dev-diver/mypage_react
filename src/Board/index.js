@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import List from '@mui/material/List';
 
 import ArticleListItem from './ArticleListItem.js';
-import PageButtons from '../PageButtons';
+import PageButtons from './PageButtons/index.js';
 
 import api from '../api.js';
 
@@ -12,13 +12,15 @@ export default function Board(props) {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [offset, setOffset] = useState(0);
+  const pagesPerButtons = 5;
+
+  const { articlePerPage, pageNumber, setPageNumber, articleUpdated } = props;
 
   useEffect(() => {
     // Fetch data on component mount
-    api.get('/article?page=0&size=5')
+    api.get(`/article?page=${pageNumber}&size=${articlePerPage}`)
       .then((response) => {
-        console.log(response);
-        console.log(response.data)
         setItems(response.data);  // Update state with the data
         setLoading(false); // Update loading state
       })
@@ -27,8 +29,7 @@ export default function Board(props) {
         setError(error.message); // Update error state
         setLoading(false);
       });
-    
-  }, []);
+  }, [pageNumber,articleUpdated]);
 
   const handleListItemClick = (event, index) =>{
     //글 불러오기
@@ -58,7 +59,12 @@ export default function Board(props) {
       <List component="nav">
         {articles}
       </List>
-      <PageButtons offset={0} pages={5}/>
+      <PageButtons 
+        offset={offset} pages={pagesPerButtons}
+        pageNumber = {pageNumber}
+        setPageNumber = {setPageNumber}
+        setOffset = {setOffset}
+      />
     </div>
   );
 }

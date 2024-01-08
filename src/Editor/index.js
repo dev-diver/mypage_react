@@ -2,7 +2,7 @@ import { Box, FormControl, FormHelperText } from "@mui/material";
 import React, { useState } from "react";
 import WriteButton from './WriteButton.js';
 import CancelButton from "./CancelButton.js";
-import {TextField, Button } from "@mui/material";
+import { TextField, Button } from "@mui/material";
 
 import api from '../api.js';
 import { red } from "@mui/material/colors";
@@ -29,21 +29,26 @@ const Editor = (props) => {
             setFormMessage('제목과 내용을 입력해주세요');
             return;
         }
+        setLoading(true);
         api.post('/article', {
             "title":title,
             "text":text,
             "userId":"user-id"
         })
         .then((response) => {
+            //게시판 재로딩
             console.log(response);
-            setLoading(false); // Update loading state
+            props.setWriteMode(false);
         })
         .catch((error) => {
+            console.log("에러!");
+            console.log(error.message);
             console.debug(error);
-            setFormMessage(error.message); // Update error state
-            setLoading(false);
+            setFormMessage("글쓰기 서버에서 에러가 발생했습니다."); // Update error state
         });
-        props.setWriteMode(false);
+        
+        setLoading(false);
+        props.afterWrite();
     }
 
     return (

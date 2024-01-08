@@ -13,6 +13,10 @@ function App() {
   const [mode, setMode] = useState(false);
   const [showArticle, setShowArticle] = useState(false);
   const [contents, setContents] =  useState(null);
+  
+  const articlePerPage = 5;
+  const [pageNumber, setPageNumber] = useState(0);
+  const [articleUpdated, setArticleUpdated] = useState(false);
 
   const setWriteMode = (isWriteMode) => {
     setMode(isWriteMode);
@@ -27,6 +31,11 @@ function App() {
     })
   }
 
+  const afterWrite = () => {
+    setPageNumber(0);
+    setArticleUpdated(prev=>!prev);
+  }
+
   return (
     <div className="App">
       <Header login={true}/>
@@ -36,8 +45,15 @@ function App() {
         <Editor 
           mode={mode}
           setWriteMode={setWriteMode}
+          afterWrite={afterWrite}
         />
-        <Board displayArticle={displayArticle}/>
+        <Board 
+          articlePerPage = {articlePerPage}
+          pageNumber =  {pageNumber}
+          setPageNumber =  {setPageNumber}
+          displayArticle = {displayArticle}
+          articleUpdated = {articleUpdated}
+        />
       </Box>
     </div>
   );
