@@ -37,8 +37,8 @@ const Editor = (props) => {
         })
         .then((response) => {
             //게시판 재로딩
-            console.log(response);
             props.setWriteMode(false);
+            props.afterWrite();
         })
         .catch((error) => {
             console.log("에러!");
@@ -46,9 +46,7 @@ const Editor = (props) => {
             console.debug(error);
             setFormMessage("글쓰기 서버에서 에러가 발생했습니다."); // Update error state
         });
-        
         setLoading(false);
-        props.afterWrite();
     }
 
     return (

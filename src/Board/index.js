@@ -18,6 +18,7 @@ export default function Board(props) {
   const { articlePerPage, pageNumber, setPageNumber, articleUpdated } = props;
 
   useEffect(() => {
+    console.log("articleUpdate", pageNumber, articlePerPage);
     // Fetch data on component mount
     api.get(`/article?page=${pageNumber}&size=${articlePerPage}`)
       .then((response) => {
@@ -45,14 +46,24 @@ export default function Board(props) {
   }
 
   let articles =
-    items.length > 0 && items.map((item,idx) => 
+    items.length > 0 ?
+    items.map((item,idx) => 
       <ArticleListItem 
         key={idx}
         idx={idx}
         item={item}
         select={select}
       />
-    );
+    ) :
+    [<ArticleListItem
+      key={0}
+      idx={0}
+      item={{
+        title : '글 좀 써주세요 ㅠ',
+        text:''
+      }}
+      select = {{selectedIndex : selectedIndex}}
+    />]
 
   return (
     <div>

@@ -32,6 +32,7 @@ function App() {
   }
 
   const afterWrite = () => {
+    console.log('작성 완료');
     setPageNumber(0);
     setArticleUpdated(prev=>!prev);
   }
