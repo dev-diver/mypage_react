@@ -37,8 +37,7 @@ const ArticleViewer = (props) => {
             afterAction('delete');
         })
         .catch((error) => {
-            console.debug(error);
-            setFormMessage("글쓰기 서버에서 에러가 발생했습니다."); // Update error state
+            setFormMessage("삭제 실패"); // Update error state
         });
         setLoading(false);
     }
@@ -55,10 +54,10 @@ const ArticleViewer = (props) => {
             {props.contents.text}
         </Box>
         </Article>
-        <EditButtonSets 
+        {localStorage.getItem("userId") == props.contents.userId && <EditButtonSets
             editMode={editMode}
             deleteArticle={(e)=>deleteArticle(props.contents.id)}
-        />
+        />}
         </Box>
     );
 };

@@ -10,7 +10,9 @@ import { Box } from '@mui/material';
 export default function Board(props) {
   const [selectedIndex, setSelectedIndex] = React.useState(1);
 
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState([{
+    title:'로딩 중...'
+}]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [offset, setOffset] = useState(0);

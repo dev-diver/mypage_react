@@ -14,7 +14,6 @@ import api from '../api.js';
 import { FormHelperText } from '@mui/material';
 import { red } from "@mui/material/colors";
 
-
 const defaultTheme = createTheme();
 
 export default function SignInSide() {
@@ -28,21 +27,24 @@ export default function SignInSide() {
     api.post('/auth/signin', userDTO)
         .then((response) => {
             const token = response.data.token;
+            const userId = response.data.id;
             if(token){
               localStorage.setItem("ACCESS_TOKEN", token);
+              localStorage.setItem("userId", userId );
               window.location.href = "/";
             }
         }).catch((e)=>{
-            setEmail('');
             setPassword('');
-            setFormMessage('로그인 실패');
-            console.log(e)
+            if(e?.response?.data?.error){
+              setFormMessage(e.response.data.error);
+            }else{
+              setFormMessage('서버 연결 이상');
+            }
         })
   }
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
     signin({userId : email, password: password});
   };
 
@@ -122,11 +124,18 @@ export default function SignInSide() {
               >
                 로그인
               </Button>
-              <Box sx={{ textAlign : 'right'}}>
-                  <Link href="#" variant="body2">
+              <Grid container>
+                <Grid item xs>
+                  <Link href="/" variant="body2">
+                    {"눈팅만"}
+                  </Link>
+                </Grid>
+                <Grid item>
+                <Link href="/signup" variant="body2">
                     {"회원가입"}
                   </Link>
-              </Box>
+                </Grid>
+              </Grid>
             </Box>
           </Box>
         </Grid>

@@ -23,7 +23,6 @@ instance.interceptors.response.use(
         if(error.response.status === 403){
             window.location.href = "/login";
         }else{
-            console.log("http error");
             console.error(error);
         }
         return Promise.reject(error);

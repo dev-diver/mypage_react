@@ -37,7 +37,7 @@ const Editor = (props) => {
         api.post('/api/article', {
             "title":editor.title,
             "text":editor.text,
-            "userId":"user-id"
+            "userId":localStorage.getItem("userId")
         })
         .then((response) => {
             //게시판 재로딩
@@ -45,7 +45,7 @@ const Editor = (props) => {
             afterAction('write');
         })
         .catch((error) => {
-            setFormMessage("글쓰기 서버에서 에러가 발생했습니다."); // Update error state
+            setFormMessage("글쓰기 실패"); // Update error state
         });
         setLoading(false);
     }
@@ -59,7 +59,7 @@ const Editor = (props) => {
         api.put(`/api/article/${id}`, {
             "title":editor.title,
             "text":editor.text,
-            "userId":"user-id"
+            "userId":localStorage.getItem("userId")
         })
         .then((response) => {
             //게시판 재로딩
@@ -68,9 +68,7 @@ const Editor = (props) => {
             afterAction('edit');
         })
         .catch((error) => {
-            console.log(error.message);
-            console.debug(error);
-            setFormMessage("글쓰기 서버에서 에러가 발생했습니다."); // Update error state
+            setFormMessage("편집 실패"); // Update error state
         });
         setLoading(false);
     }

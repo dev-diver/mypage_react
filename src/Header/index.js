@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Button from '@mui/material/Button';
 import { Box } from "@mui/material";
-import api from '../api.js';
 
 const SignupButton = (props) =>{
     return(
-        <Button sx={{margin:'10px'}} variant ="contained">회원가입</Button>
+        <Button sx={{margin:'10px'}} 
+            variant ="contained"
+            onClick = {(e)=>{ window.location.href = '/signup'}}
+        >회원가입</Button>
     )
 }
 
 const LoginButton = (props) =>{
-
-    
 
     return(
         <Button 
@@ -26,6 +26,7 @@ const LogoutButton = (props) =>{
     const signout = () => {
         props.setLogin(false)
         localStorage.removeItem("ACCESS_TOKEN");
+        localStorage.removeItem("userId");
     }
 
     return(
