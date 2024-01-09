@@ -33,13 +33,9 @@ function App() {
     setShowArticle(!isWriteMode);
   }
 
-  const displayArticle = (id, title, text) => {
+  const displayArticle = (contents) => {
     setWriteMode(false);
-    setContents({
-      id: id,
-      title: title,
-      text: text
-    })
+    setContents(contents)
   }
 
   const afterAction = (action) => {

@@ -8,7 +8,7 @@ import api from '../api.js';
 import { Box } from '@mui/material';
 
 export default function Board(props) {
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [selectedContentsId, setSelectedContentsId] = React.useState(0);
 
   const [items, setItems] = useState([{
     title:'로딩 중...'
@@ -36,15 +36,12 @@ export default function Board(props) {
 
   const handleListItemClick = (event, index) =>{
     //글 불러오기
-    const id = items[index].id;
-    const title = items[index].title;
-    const text = items[index].text;
-    props.displayArticle(id, title, text);
-    setSelectedIndex(index);
+    props.displayArticle(items[index]);
+    setSelectedContentsId(items[index].id);
   };
 
   const select = {
-    selectedIndex : selectedIndex,
+    selectedContentsId : selectedContentsId,
     clickHandler : handleListItemClick
   }
 
@@ -65,7 +62,7 @@ export default function Board(props) {
         title : '글 좀 써주세요 ㅠ',
         text:''
       }}
-      select = {{selectedIndex : selectedIndex}}
+      select = {{selectedContentsId : selectedContentsId}}
     />]
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Paper, Divider, Box } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import EditButtonSets from "./EditButtonSets";
@@ -14,9 +14,12 @@ const ArticleViewer = (props) => {
         lineHeight: '25px',
         padding: '20px',
         whiteSpace: 'pre-line',
-        margin: '20px 0'
+        margin: '10px 0'
     }));
 
+    useEffect(()=> {
+        console.log("local",localStorage.getItem("userId"), "userId" , props.contents.userId);
+    }, [])
     
     //delete
     const [loading, setLoading] = useState(true);
@@ -42,22 +45,26 @@ const ArticleViewer = (props) => {
         setLoading(false);
     }
 
+
     return (
-        props.contents &&
+        props.contents?.text &&
         <Box>
-        <Article elevation={1}>
-        <Box sx={{marginY: "10px"}}>
-            {props.contents.title}
-        </Box>
-        <Divider/>
-        <Box sx={{marginTop: "10px"}}>
-            {props.contents.text}
-        </Box>
-        </Article>
-        {localStorage.getItem("userId") == props.contents.userId && <EditButtonSets
-            editMode={editMode}
-            deleteArticle={(e)=>deleteArticle(props.contents.id)}
-        />}
+            <Article elevation={1}>
+            <Box sx={{marginY: "10px"}}>
+                {props.contents.title}
+            </Box>
+            <Divider/>
+            <Box sx={{marginTop: "10px"}}>
+                {props.contents.text}
+            </Box>
+            </Article>
+            {localStorage.getItem("userId") == props.contents.userId ?
+             <EditButtonSets
+                editMode={editMode}
+                deleteArticle={(e)=>deleteArticle(props.contents.id)}
+            />:
+            <Box sx={{height:'56px'}}></Box>
+            }
         </Box>
     );
 };

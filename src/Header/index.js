@@ -44,7 +44,6 @@ const Header = (props) => {
     useEffect(() => {
         const accessToken = localStorage.getItem("ACCESS_TOKEN");
         if (accessToken) {
-            console.log("2");
             setLogin(true);
         } else {
             setLogin(false);

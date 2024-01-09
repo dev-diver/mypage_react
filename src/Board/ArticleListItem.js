@@ -9,7 +9,7 @@ const ArticleListItem = (props) => {
 
     return (
         <ListItemButton
-          selected={props.select.selectedIndex === props.idx}
+          selected={props.select.selectedContentsId === props.item.id}
           onClick={clickHandler && ((event) => clickHandler(event, props.idx))}
         >
           <ListItemText primary={item.title} />
