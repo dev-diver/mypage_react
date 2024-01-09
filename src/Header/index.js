@@ -39,7 +39,7 @@ const LogoutButton = (props) =>{
 
 const Header = (props) => {
 
-    const [login, setLogin] = useState(false);
+    const {login, setLogin}  = props;
 
     useEffect(() => {
         const accessToken = localStorage.getItem("ACCESS_TOKEN");

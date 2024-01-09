@@ -16,14 +16,19 @@ const ArticleViewer = (props) => {
         whiteSpace: 'pre-line',
         margin: '10px 0'
     }));
-
-    useEffect(()=> {
-        console.log("local",localStorage.getItem("userId"), "userId" , props.contents.userId);
-    }, [])
     
     //delete
     const [loading, setLoading] = useState(true);
     const [formMessage, setFormMessage] = useState('');
+    const [canEdit, setCanEdit] = useState(false);
+
+    useEffect(()=>{
+        if(localStorage.getItem("userId") == props.contents?.userId){
+            setCanEdit(true);
+        }else{
+            setCanEdit(false);
+        }
+    }, [props.login]);
 
     const { setWriteMode, afterAction } = props;
 
@@ -58,7 +63,7 @@ const ArticleViewer = (props) => {
                 {props.contents.text}
             </Box>
             </Article>
-            {localStorage.getItem("userId") == props.contents.userId ?
+            {canEdit ?
              <EditButtonSets
                 editMode={editMode}
                 deleteArticle={(e)=>deleteArticle(props.contents.id)}

@@ -11,6 +11,7 @@ import { Box } from '@mui/material';
 function App() {
   
   //login
+  const [login, setLogin] = useState(false);
 
   //showArticle
   const [showArticle, setShowArticle] = useState(false);
@@ -57,7 +58,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header/>
+      <Header login={login} setLogin={setLogin} />
       <Box sx={{ mx: 'auto',width: '100%', maxWidth: 500, bgcolor: 'background.paper', textAlign: 'center'}}>
         <Title/>
         <Editor
@@ -75,6 +76,7 @@ function App() {
         />
         {showArticle && 
         <ArticleViewer
+          login={login}
           editMode = {editMode}
           contents = {contents}
           setWriteMode = {setWriteMode}
