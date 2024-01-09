@@ -5,4 +5,19 @@ const instance = axios.create({
     baseURL: 'http://localhost:8080/api'
 });
 
+instance.interceptors.response.use(
+    response => {
+        return response;
+    },
+    error => {
+        if(error.response.status === 403){
+            window.location.href = "/login";
+        }else{
+            console.log("http error");
+            console.error(error);
+        }
+        return Promise.reject(error);
+    }
+)
+
 export default instance;
