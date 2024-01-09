@@ -9,6 +9,8 @@ import ArticleViewer from './ArticleViewer'
 import { Box } from '@mui/material';
 
 function App() {
+  
+  //login
 
   //showArticle
   const [showArticle, setShowArticle] = useState(false);
@@ -59,7 +61,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header login={true}/>
+      <Header/>
       <Box sx={{ mx: 'auto',width: '100%', maxWidth: 500, bgcolor: 'background.paper', textAlign: 'center'}}>
         <Title/>
         <Editor

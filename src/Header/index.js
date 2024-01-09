@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Button from '@mui/material/Button';
 import { Box } from "@mui/material";
+import api from '../api.js';
 
 const SignupButton = (props) =>{
     return(
@@ -9,25 +10,50 @@ const SignupButton = (props) =>{
 }
 
 const LoginButton = (props) =>{
+
+    
+
     return(
-        <Button variant ="contained">로그인</Button>
+        <Button 
+            variant ="contained"
+            onClick = {(e)=>{ window.location.href = "/login"}}
+        >로그인</Button>
     )
 }
 
 const LogoutButton = (props) =>{
+
+    const signout = () => {
+        props.setLogin(false)
+        localStorage.removeItem("ACCESS_TOKEN");
+    }
+
     return(
-        <Button variant ="contained">로그아웃</Button>
+        <Button 
+            variant ="contained"
+            onClick = {(e)=>signout()}
+        >로그아웃</Button>
     )
 }
 
 const Header = (props) => {
 
-    
+    const [login, setLogin] = useState(false);
+
+    useEffect(() => {
+        const accessToken = localStorage.getItem("ACCESS_TOKEN");
+        if (accessToken) {
+            console.log("2");
+            setLogin(true);
+        } else {
+            setLogin(false);
+        }
+    }, []);
 
     return (
         <Box sx={{padding: '10px', bgcolor: 'Background', textAlign: 'right'}}>
-            {props.login ?
-                <LogoutButton/> :
+            {login ?
+                <LogoutButton setLogin={setLogin}/> :
                 <div><SignupButton/><LoginButton/></div>
             }   
         </Box>

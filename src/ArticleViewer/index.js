@@ -17,6 +17,7 @@ const ArticleViewer = (props) => {
         margin: '20px 0'
     }));
 
+    
     //delete
     const [loading, setLoading] = useState(true);
     const [formMessage, setFormMessage] = useState('');
@@ -29,7 +30,7 @@ const ArticleViewer = (props) => {
 
     const deleteArticle = (id) => {
         setLoading(true);
-        api.delete(`/article/${id}`)
+        api.delete(`/api/article/${id}`)
         .then((response) => {
             //게시판 재로딩
             setWriteMode(false);

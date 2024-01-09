@@ -15,8 +15,13 @@ const Editor = (props) => {
     const [formMessage, setFormMessage] = useState('');
 
     const handleClickStartWrite = (e) => {
-        setWriteMode(true);
-        setFormMessage('');
+        const token = localStorage.getItem('ACCESS_TOKEN');
+        if(!token){
+            alert('로그인이 필요합니다.');
+        }else{
+            setWriteMode(true);
+            setFormMessage('');
+        }
     }
 
     const handleClickCancelWrite = (e) => {
@@ -29,7 +34,7 @@ const Editor = (props) => {
             return;
         }
         setLoading(true);
-        api.post('/article', {
+        api.post('/api/article', {
             "title":editor.title,
             "text":editor.text,
             "userId":"user-id"
@@ -51,7 +56,7 @@ const Editor = (props) => {
             return;
         }
         setLoading(true);
-        api.put(`/article/${id}`, {
+        api.put(`/api/article/${id}`, {
             "title":editor.title,
             "text":editor.text,
             "userId":"user-id"

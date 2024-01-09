@@ -20,7 +20,7 @@ export default function Board(props) {
 
   useEffect(() => {
     // Fetch data on component mount
-    api.get(`/article?page=${pageNumber}&size=${articlePerPage}`)
+    api.get(`/api/article?page=${pageNumber}&size=${articlePerPage}`)
       .then((response) => {
         setItems(response.data);  // Update state with the data
         setLoading(false); // Update loading state
